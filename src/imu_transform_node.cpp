@@ -19,13 +19,24 @@ public:
     ros::NodeHandle private_nh("~");
     private_nh.param<std::string>("target_frame", target_frame_, "base_link");
 
+    // ROS Info for initialization
     ROS_INFO("IMU Transform Node initialized with:");
+    ROS_INFO("Input Topic: %s", imu_sub_.getTopic().c_str());
+    ROS_INFO("Output Topic: %s", transformed_imu_pub_.getTopic().c_str());
     ROS_INFO("Target Frame: %s", target_frame_.c_str());
+
+    first_message_received_ = false;  // To track if the first IMU message is received
   }
 
 private:
   void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
   {
+    if (!first_message_received_)
+    {
+      ROS_INFO("First IMU message received. Transform process started.");
+      first_message_received_ = true;
+    }
+
     try
     {
       // Lookup the transform from the IMU frame to the target frame
@@ -72,6 +83,7 @@ private:
 
   // Parameters
   std::string target_frame_;
+  bool first_message_received_;  // To track the first IMU message
 };
 
 int main(int argc, char** argv)
