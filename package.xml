@@ -1,17 +1,24 @@
-<package format="2">
+<?xml version="1.0"?>
+<package format="3">
   <name>tf_imu_to_base</name>
-  <version>0.0.0</version>
-  <description>The imu transform package</description>
+  <version>0.1.0</version>
+  <description>Transforms IMU data to a specified target frame</description>
 
   <maintainer email="arghyame20buet@gmail.com">Arghya Chatterjee</maintainer>
-  <license>Apache 2.0</license>
+  <license>MIT</license>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <depend>roscpp</depend>
-  <depend>std_msgs</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
   <depend>geometry_msgs</depend>
-  <depend>tf</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+
+  <exec_depend>launch</exec_depend>
 
   <export>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>

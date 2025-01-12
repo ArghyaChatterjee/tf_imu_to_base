@@ -10,23 +10,25 @@ Create a ros2 colcon workspace and clone the repo inside the workspace:
 mkdir -p ros2_ws/src
 cd ros2_ws/src
 git clone https://github.com/ArghyaChatterjee/tf_imu_to_base.git
+cd tf_imu_to_base
+git checkout feature/ros2
 ```
 # Build the package
 This requires mostly standard ros messages which are already installed at the time of installing ros humble. No additional packages are needed to be installed.
 ```
 cd ~/ros2_ws
-colcon build tf_imu_to_base
-source devel/setup.bash
+colcon build --packages-select tf_imu_to_base
+source install/setup.bash
 ```
 
 # Launch the transform node
 Modify the `imu_transform.launch` file according to the `topics` and `frame name` that you want to publish the imu data. Then launch the node like this:
 ```bash
-roslaunch tf_imu_to_base imu_transform.launch
+ros2 launch tf_imu_to_base imu_transform.launch.py
 ```
 There is a separate launch file for zed camera. If you want to test it, launch it like this:
 ```bash
-roslaunch tf_imu_to_base zedm_imu_transform.launch
+ros2 launch tf_imu_to_base zedm_imu_transform.launch.py
 ```
 <div align="center">
    <img src="media/zed_imu_frame_transformed.gif"/>
@@ -34,13 +36,13 @@ roslaunch tf_imu_to_base zedm_imu_transform.launch
 
 For zed, the imu is publishing at 200 Hz. So, the transformed imu is also publishing at 200 hz. Here is the original imu data:
 ```
-$ rostopic echo /zedm/zed_node/imu/data
+$ ros2 topic echo /zed/zed_node/imu/data
 header: 
   seq: 30944
   stamp: 
     secs: 1736642323
     nsecs: 254978301
-  frame_id: "zedm_imu_link"
+  frame_id: "zed_imu_link"
 orientation: 
   x: 0.02223959006369114
   y: 0.00240450631827116
@@ -61,13 +63,13 @@ linear_acceleration_covariance: [0.08261747658252716, 0.0, 0.0, 0.0, 0.088293775
 ```
 Here is the transformed imu data:
 ```
-$ rostopic echo /zedm/zed_node/imu/data_transformed
+$ ros2 topic echo /zed/zed_node/imu/data_transformed
 header: 
   seq: 5272
   stamp: 
     secs: 1736642194
     nsecs: 894398855
-  frame_id: "base_link"
+  frame_id: "zed_camera_link"
 orientation: 
   x: 0.01986186491454831
   y: 0.0016617271223713034
