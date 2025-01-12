@@ -1,20 +1,21 @@
 # Transform IMU to Baselink
-This repository is about transforming imu data from imu frame to base link frame.
+This repository is about transforming imu data from imu frame to base link frame. This code is the ros2 version of this package.
 
 # Requirements
-This repository is tested with Ubuntu 20.04 and ROS noetic.
+This repository is tested with Ubuntu 22.04 and ROS Humble.
 
 # Setup the repo
-Create a ros1 catkin workspace and clone the repo inside the workspace:
+Create a ros2 colcon workspace and clone the repo inside the workspace:
 ```
-mkdir -p ros1_ws/src
+mkdir -p ros2_ws/src
+cd ros2_ws/src
 git clone https://github.com/ArghyaChatterjee/tf_imu_to_base.git
 ```
 # Build the package
-This requires mostly standard ros messages which are already installed at the time of installing ros noetic. No additional packages are needed to be installed.
+This requires mostly standard ros messages which are already installed at the time of installing ros humble. No additional packages are needed to be installed.
 ```
-cd ~/ros1_ws
-catkin build tf_imu_to_base
+cd ~/ros2_ws
+colcon build tf_imu_to_base
 source devel/setup.bash
 ```
 
