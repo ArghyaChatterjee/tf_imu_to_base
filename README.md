@@ -1,5 +1,5 @@
 # Transform IMU to Baselink
-This repository is about transforming imu data from imu frame to base link frame.
+This repository is about transforming imu data from imu frame to base link frame. This code is the ros1 version of this package.
 
 # Requirements
 This repository is tested with Ubuntu 20.04 and ROS noetic.
